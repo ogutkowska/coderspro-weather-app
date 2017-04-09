@@ -9,13 +9,13 @@ Forecast for:
 <div ng-repeat="w in weatherResult.list">
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{{ formatedDate(w.dt) | date:"dd/MM/yyyy"}}</h3>
-                </div>
-                <div class="panel-body">
-                    Daytime temperature: {{ convertToCelsius(w.temp.day)}}
-                </div>
+          <weather-report
+            weather-day="w"
+            formated-date="formatedDate(date)"
+            convert-to-celsius="convertToCelsius(dayTimeTemp)"
+            date-format="'yyyy-MM-dd'">
+
+          </weather-report>
             </div>
         </div>
     </div>
