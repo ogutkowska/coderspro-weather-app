@@ -12,9 +12,9 @@ angular.module('weatherApp').controller('forecastController',['$scope','$resourc
     $scope.city = cityService.city;
     $scope.days = $routeParams.days || 2;
 
-    var weatherApi = $resource('http://api.openweathermap.org/data/2.5/forecast/daily?q=Gdansk&appid=aebbf9d13c4d386edfdbca3b0e305238')
+    var weatherApi = $resource('http://api.openweathermap.org/data/2.5/forecast/daily')
     $scope.weatherResult = weatherApi.get({
-      q: "Gdansk",
+      q: $scope.city,
       cnt: $scope.days,
       appid: 'aebbf9d13c4d386edfdbca3b0e305238'
     }, function (res) {
