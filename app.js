@@ -16,6 +16,11 @@ weatherApp.config(['$routeProvider', function ($routeProvider){
     templateUrl: '/views/forecast.html',
     controller: 'forecastController'
   })
+
+  .when('/forecast/:days', {
+    templateUrl: '/views/forecast.html',
+    controller: 'forecastController'
+  })
 }]);
 
 //SERVICE
@@ -26,7 +31,6 @@ weatherApp.service('cityService', function () {
 //CONTROLLESR
 weatherApp.controller('homeController',['$scope', 'cityService',
 function ($scope, cityService) {
-  $scope.city = cityService.city;
 
   $scope.$watch ('city', function () {
     cityService.city = $scope.city;
@@ -34,20 +38,24 @@ function ($scope, cityService) {
 }]);
 
 
-weatherApp.controller('forecastController',['$scope','$resource','cityService',
+weatherApp.controller('forecastController',['$scope','$resource','$routeParams','cityService',
+function ($scope, $resource, $routeParams, cityService) {
+$scope.city = cityService.city;
+$scope.days = $routeParams.days || 2;
 
- function ($scope, $resource, cityService) {
-   var weatherApi = $resource('http://api.openweathermap.org/data/2.5/forecast/daily?q=Gdansk&cnt=2&appid=aebbf9d13c4d386edfdbca3b0e305238')
+var weatherApi = $resource('http://api.openweathermap.org/data/2.5/forecast/daily?q=Gdansk&appid=aebbf9d13c4d386edfdbca3b0e305238')
    $scope.weatherResult = weatherApi.get({
      q: "Gdansk",
-     cnt: 2,
+     cnt: $scope.days,
      appid: 'aebbf9d13c4d386edfdbca3b0e305238'
    }, function (res) {
-     console.log(res);
+
      return res;
    });
 
-  $scope.city = cityService.city;
+
+
+
 
   $scope.formatedDate = function (date) {
     return new Date(date * 1000);
