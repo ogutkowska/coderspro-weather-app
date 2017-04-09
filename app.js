@@ -68,6 +68,4 @@ var weatherApi = $resource('http://api.openweathermap.org/data/2.5/forecast/dail
   }
 }]);
 
-
-
-//SERVICES
+// DIRECTIVES

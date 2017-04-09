@@ -1,4 +1,11 @@
 Forecast for {{ city }}
+<hr />
+Forecast for:
+ <a  ng-class="{'bg-primary': days === '2' }" href="#/forecast/2">2</a> |
+ <a ng-class="{'bg-primary': days === '5' }" href="#/forecast/5">5</a> |
+ <a ng-class="{'bg-primary': days === '7' }" href="#/forecast/7">7</a>
+<hr />
+
 <div ng-repeat="w in weatherResult.list">
     <div class="row">
         <div class="col-md-12">
