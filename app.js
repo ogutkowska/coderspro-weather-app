@@ -13,7 +13,7 @@ weatherApp.config(['$routeProvider', function ($routeProvider){
     controller: 'homeController'
   })
   .when('/forecast', {
-    templateUrl: 'views/forecast.html',
+    templateUrl: '/views/forecast.html',
     controller: 'forecastController'
   })
 }]);
@@ -26,7 +26,7 @@ weatherApp.service('cityService', function () {
 //CONTROLLESR
 weatherApp.controller('homeController',['$scope', 'cityService',
 function ($scope, cityService) {
-  //$scope.city = cityService.city;
+  $scope.city = cityService.city;
 
   $scope.$watch ('city', function () {
     cityService.city = $scope.city;
@@ -42,8 +42,9 @@ weatherApp.controller('forecastController',['$scope','$resource','cityService',
      q: "Gdansk",
      cnt: 2,
      appid: 'aebbf9d13c4d386edfdbca3b0e305238'
-   }).$promise.then(function (data){
-     console.log(data);
+   }, function (res) {
+     console.log(res);
+     return res;
    });
 
   $scope.city = cityService.city;
